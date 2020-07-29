@@ -8,6 +8,7 @@ xorg-xclock
 nitrogen
 alsa-utils
 ranger
+firefox
 pygobject-devel
 gobject-introspection
 opendesktop-fonts

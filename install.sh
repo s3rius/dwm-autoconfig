@@ -21,7 +21,13 @@ function build_libs_from_sources(){
   build_from_git "https://gitlab.le-memese.com/s3rius/awatch.git" "makepkg -fsri"
 }
 
-
+function update_firefox_profile(){
+  firefox_dir="$HOME/.mozilla/firefox"
+  fire_profile="$(grep Default $firefox_dir/installs.ini | cut -d '=' -f2)"
+  cp -v ./dotfiles/firefox/user.js "$firefox_dir/$fire_profile"
+  mkdir -vp "$firefox_dir/$fire_profile/chrome"
+  cp -v ./dotfiles/firefox/userChrome.css "$firefox_dir/$fire_profile/chrome"
+}
 
 function copy_dotfiles(){
   sed "s#{{dwm_dir}}#$(pwd)/dwm#g" ./update_desktop.sh > "$HOME/.local/bin/update_desktop"
@@ -37,7 +43,7 @@ function copy_dotfiles(){
   git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/plugins/git-flow-completion
 }
 
-enable_services()
+function enable_services()
 {
   systemctl --user enable music_bg.service
 }
@@ -45,9 +51,10 @@ enable_services()
 function main(){
   sudo pacman -Syu --needed $(cat ./pacman.deps)
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
-  build_libs_from_sources
-  enable_services
-  copy_dotfiles
+  update_firefox_profile
+  # build_libs_from_sources
+  # enable_services
+  # copy_dotfiles
 }
 
 trap cleanup EXIT
