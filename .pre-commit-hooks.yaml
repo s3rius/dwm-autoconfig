@@ -1,0 +1,6 @@
+- id: sort_deps
+  name: Deps sorting
+  description: sort entries of a deps files.
+  language: script
+  entry: hooks/deps_sort.sh
+  files: *.deps
