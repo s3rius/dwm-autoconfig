@@ -34,6 +34,7 @@ function copy_dotfiles(){
   chmod 777 "$HOME/.local/bin/update_desktop"
   cp -v ./dotfiles/.zshrc      "$HOME"
   cp -v ./dotfiles/.zshrc      "$HOME"
+  cp -v ./dotfiles/.xinitrc    "$HOME"
   cp -v ./dotfiles/.picom.conf "$HOME"
 
   git_flow_dir="$HOME/.oh-my-zsh/custom/plugins/git-flow-completion"
@@ -43,8 +44,7 @@ function copy_dotfiles(){
   git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/plugins/git-flow-completion
 }
 
-function enable_services()
-{
+function enable_services(){
   systemctl --user enable music_bg.service
 }
 
@@ -52,9 +52,9 @@ function main(){
   sudo pacman -Syu --needed $(cat ./pacman.deps)
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
   update_firefox_profile
-  # build_libs_from_sources
-  # enable_services
-  # copy_dotfiles
+  build_libs_from_sources
+  enable_services
+  copy_dotfiles
 }
 
 trap cleanup EXIT
