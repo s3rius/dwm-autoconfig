@@ -25,6 +25,8 @@ function apply_patch(){
   pushd "{{dwm_dir}}"
   git checkout -b "patch/$patch_name"
   patch < "$patch_path"
+  git add .
+  git commit -m "Patch \"$patch_name\" applied."
 }
 
 function show_help(){
