@@ -1,5 +1,5 @@
 #!/bin/bash
 
 pushd "{{dwm_dir}}"
-sudo make install
+rm -fv config.h && make && sudo make clean install
 popd

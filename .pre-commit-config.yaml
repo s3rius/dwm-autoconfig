@@ -8,3 +8,8 @@ repos:
     language: script
     entry: hooks/deps_sort.sh
     files: .deps$
+
+  - id: dwm_aux
+    name: DWM aux files cleaner
+    language: script
+    entry: hooks/dwm_cleaner.sh

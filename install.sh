@@ -32,8 +32,9 @@ function update_firefox_profile(){
 function copy_dotfiles(){
   sed "s#{{dwm_dir}}#$(pwd)/dwm#g" ./update_desktop.sh > "$HOME/.local/bin/update_desktop"
   chmod 777 "$HOME/.local/bin/update_desktop"
+  cp -v ./dotfiles/.zshenv     "$HOME"
   cp -v ./dotfiles/.zshrc      "$HOME"
-  cp -v ./dotfiles/.zshrc      "$HOME"
+  cp -v ./dotfiles/.xutil      "$HOME"
   cp -v ./dotfiles/.xinitrc    "$HOME"
   cp -v ./dotfiles/.picom.conf "$HOME"
 
@@ -52,9 +53,10 @@ function main(){
   sudo pacman -Syu --needed $(cat ./pacman.deps)
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
   update_firefox_profile
-  build_libs_from_sources
+  # build_libs_from_sources
   enable_services
   copy_dotfiles
+  update_desktop
 }
 
 trap cleanup EXIT
