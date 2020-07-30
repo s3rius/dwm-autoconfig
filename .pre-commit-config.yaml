@@ -1,7 +1,10 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
--   repo: https://github.com/s3rius/dwm-autoconfig
-    rev: master
-    hooks:
-    -   id: sort_deps
+- repo: local
+  hooks:
+  - id: sort_deps
+    name: Deps sort
+    language: script
+    entry: hooks/deps_sort.sh
+    files: .deps$
