@@ -9,8 +9,8 @@ function full_update(){
   git checkout -b master
   git checkout -b "$apply_branch"
 
-  for branch in $(git branch -a | grep -Ev 'master|remotes' | cut -c 3-);do
-    git merge "$branch"
+  for branch in $(git branch -a | grep -Ev 'master|remotes' | grep 'patch/' | cut -c 3-);do
+    git merge "$branch" --no-edit
   done
   
   local_update
