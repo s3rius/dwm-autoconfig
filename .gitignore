@@ -1,5 +1,9 @@
-dwm
-drw.o
-dwm.o
-util.o
+dwm/dwm
+dwm/drm
+dwm/drw.o
+dwm/dwm.o
+dwm/util.o
+dwm/config.h
 dwm-6.2.tar.gz
+*.orig
+*.rej
