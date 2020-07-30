@@ -53,7 +53,7 @@ function main(){
   sudo pacman -Syu --needed $(cat ./pacman.deps)
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
   update_firefox_profile
-  # build_libs_from_sources
+  build_libs_from_sources
   enable_services
   copy_dotfiles
   update_desktop
