@@ -1,17 +1,17 @@
 #!/bin/bash
 
 function cleanup(){
-  rm -rfv $(find -name "build_*" -type d)
+  rm -rfv "$(find . -name "build_*" -type d)"
 }
 
 function build_from_git(){
   build_dir="$(mktemp -d build_XXXX)"
-  pushd "$build_dir"
-  git clone $1 repo
-  pushd repo
+  pushd "$build_dir" || exit
+  git clone "$1" repo
+  pushd repo || exit
   eval "$2"
-  popd
-  popd
+  popd || exit
+  popd || exit
 }
 
 function build_libs_from_sources(){
@@ -23,7 +23,7 @@ function build_libs_from_sources(){
 
 function update_firefox_profile(){
   firefox_dir="$HOME/.mozilla/firefox"
-  fire_profile="$(grep Default $firefox_dir/installs.ini | cut -d '=' -f2)"
+  fire_profile="$(grep Default "$firefox_dir"/installs.ini | cut -d '=' -f2)"
   cp -v ./dotfiles/firefox/user.js "$firefox_dir/$fire_profile"
   mkdir -vp "$firefox_dir/$fire_profile/chrome"
   cp -v ./dotfiles/firefox/userChrome.css "$firefox_dir/$fire_profile/chrome"
@@ -50,7 +50,9 @@ function enable_services(){
 }
 
 function main(){
+  # shellcheck disable=SC2046
   sudo pacman -Syu --needed $(cat ./pacman.deps)
+  # shellcheck disable=SC2046
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
   update_firefox_profile
   build_libs_from_sources

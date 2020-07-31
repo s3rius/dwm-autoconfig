@@ -4,7 +4,6 @@ set -e
 
 check_files() {
     local all_files=( "$@" )
-    has_error=0
     for file in "${all_files[@]}" ; do
         if [[ -f "$file" ]]; then
           sort -o "$file" "$file"

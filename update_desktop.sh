@@ -20,9 +20,9 @@ function full_update(){
 }
 
 function apply_patch(){
-  patch_name="$(basename $1 | cut -d '.' -f1)"
+  patch_name="$(basename "$1" | cut -d '.' -f1)"
   patch_path="$(readlink -f "$1")"
-  pushd "{{dwm_dir}}"
+  pushd "{{dwm_dir}}" || exit
   git checkout -b "patch/$patch_name"
   patch < "$patch_path"
   git add .
@@ -59,35 +59,37 @@ function main(){
   done
   
   if [[ show_help -eq 1 ]];then
-    pushd "{{dwm_dir}}"
+    pushd "{{dwm_dir}}" || exit
     show_help
     exit 0
   fi
 
   if [[ -n "$patch_to_apply" ]];then
     apply_patch "$patch_to_apply"
-    popd
+    popd || exit
     if [[ $((full_update + local_update)) -eq 0 ]];then
       exit 0
     fi
   fi
 
+  pushd "{{dwm_dir}}" || exit
   if [[ full_update -eq 1 ]];then
-    pushd "{{dwm_dir}}"
     full_update
     exit 0
   fi
 
   if [[ local_update -eq 1 ]];then
-    pushd "{{dwm_dir}}"
     local_update
     exit 0
   fi
   
-  pushd "{{dwm_dir}}"
   show_help
   exit 0
 }
 
-trap popd EXIT
+function go_back(){
+  popd || exit
+}
+
+trap go_back EXIT
 main "$@"

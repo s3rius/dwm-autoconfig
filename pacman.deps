@@ -12,6 +12,7 @@ picom
 playerctl
 pygobject-devel
 ranger
+shellcheck
 ttf-fira-code
 ttf-font-awesome
 ttf-ubuntu-font-family

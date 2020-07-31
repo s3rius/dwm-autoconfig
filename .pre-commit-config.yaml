@@ -13,3 +13,9 @@ repos:
     name: DWM aux files cleaner
     language: script
     entry: hooks/dwm_cleaner.sh
+
+- repo: git://github.com/detailyang/pre-commit-shell
+  rev: v1.0.6
+  hooks:
+  - id: shell-lint
+    exclude: ^dotfiles/
