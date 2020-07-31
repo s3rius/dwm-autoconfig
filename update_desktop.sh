@@ -13,7 +13,7 @@ function full_update(){
     git merge "$branch" --no-edit
   done
   
-  local_update
+  local_update || exit 1
   
   git checkout master
   git branch -D "$apply_branch"
