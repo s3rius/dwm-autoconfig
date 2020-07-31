@@ -1,7 +1,8 @@
 #!/bin/bash
 
 function cleanup(){
-  rm -rfv "$(find . -name "build_*" -type d)"
+  # shellcheck disable=SC2046
+  rm -rfv $(find . -name "build_*" -type d)
 }
 
 function build_from_git(){
