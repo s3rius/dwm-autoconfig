@@ -3,6 +3,7 @@ asp
 base-devel
 bat
 dmenu
+dunst
 firefox
 gobject-introspection
 lsd
@@ -16,6 +17,7 @@ shellcheck
 ttf-fira-code
 ttf-font-awesome
 ttf-ubuntu-font-family
+unclutter
 xdg-utils
 xorg
 xorg-xclock

@@ -34,6 +34,8 @@ function copy_dotfiles(){
   sed "s#{{dwm_dir}}#$(pwd)/dwm#g" ./update_desktop.sh > "$HOME/.local/bin/update_desktop"
   chmod 777 "$HOME/.local/bin/update_desktop"
   cp -v ./dotfiles/.zshenv     "$HOME"
+  cp -v ./dotfiles/.zshenv     "$HOME"
+  cp -v ./dotfiles/.dunstrc    "$HOME"
   cp -v ./dotfiles/.zshrc      "$HOME"
   cp -v ./dotfiles/.xutil      "$HOME"
   cp -v ./dotfiles/.xinitrc    "$HOME"
