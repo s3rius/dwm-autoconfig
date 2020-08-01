@@ -2,7 +2,7 @@
 
 function cleanup(){
   # shellcheck disable=SC2046
-  rm -rfv $(find . -name "build_*" -type d)
+  rm -rf $(find . -name "build_*" -type d)
 }
 
 function build_from_git(){
@@ -16,6 +16,7 @@ function build_from_git(){
 }
 
 function build_libs_from_sources(){
+  build_from_git "https://git.suckless.org/wmname" "sudo make install"
   build_from_git "https://github.com/robbyrussell/oh-my-zsh.git" "sh ./tools/install.sh"
   build_from_git "https://github.com/actionless/pikaur.git" "makepkg -fsri"
   build_from_git "https://gitlab.le-memese.com/s3rius/music_bg.git" "makepkg -fsri"
@@ -33,12 +34,12 @@ function update_firefox_profile(){
 function copy_dotfiles(){
   sed "s#{{dwm_dir}}#$(pwd)/dwm#g" ./update_desktop.sh > "$HOME/.local/bin/update_desktop"
   chmod 777 "$HOME/.local/bin/update_desktop"
+  cp -v ./dotfiles/.zshrc      "$HOME"
   cp -v ./dotfiles/.zshenv     "$HOME"
   cp -v ./dotfiles/.zshenv     "$HOME"
   cp -v ./dotfiles/.dunstrc    "$HOME"
-  cp -v ./dotfiles/.zshrc      "$HOME"
-  cp -v ./dotfiles/.xutil      "$HOME"
   cp -v ./dotfiles/.xinitrc    "$HOME"
+  cp -v ./dotfiles/.xprofile   "$HOME"
   cp -v ./dotfiles/.picom.conf "$HOME"
 
   git_flow_dir="$HOME/.oh-my-zsh/custom/plugins/git-flow-completion"
@@ -61,7 +62,12 @@ function main(){
   build_libs_from_sources
   enable_services
   copy_dotfiles
-  update_desktop
+  git remote update
+  git pull --all
+  echo "######## Installation complete ########"
+  echo "Now you can build your desktop."
+  echo "To do so just run \`update_desktop -f\`"
+  update_desktop -h
 }
 
 trap cleanup EXIT

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+wmname LG3D
 setxkbmap -model pc105 -layout us,ru -option grp:caps_toggle
 picom --config ~/.picom.conf -b
 nitrogen --restore

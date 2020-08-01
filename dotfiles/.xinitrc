@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -f ~/.xutil ] && . ~/.xutil
+[ -f ~/.xprofile ] && . ~/.xprofile
 
 while true; do
  xsetroot -name "$( date +"%F %R")"
