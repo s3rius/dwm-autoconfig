@@ -1,4 +1,6 @@
 #!/bin/bash
+RED='\033[0;31m'
+NC='\033[0m' # No color
 
 function local_update(){
   rm -fv config.h && make && sudo make clean install
@@ -6,13 +8,30 @@ function local_update(){
 
 function full_update(){
   apply_branch="apply-$(uuidgen)"
-  git checkout -b master
+  git checkout master
   git checkout -b "$apply_branch"
+  apply_conf="$(mktemp /tmp/custom_patchXXXXX)"
+  echo "# You can edit this file to manipulate ordering and patches to apply" > "$apply_conf"
+  git branch -a | grep -Ev 'master|remotes' | grep 'patch/' | cut -c 3- >> "$apply_conf"
+  echo "$EDITOR"
+  if [ -z ${EDITOR+x} ];then
+    echo -e "${RED}\$EDITOR env is not found${NC}.\nTry this before running script: 'export EDITOR=/bin/vim'"
+    git checkout master
+    git branch -D "$apply_branch"
+    exit 1
+  fi
+  eval "$EDITOR \"$apply_conf\""
 
-  for branch in $(git branch -a | grep -Ev 'master|remotes' | grep 'patch/' | cut -c 3-);do
+  while IFS= read -r branch;do
+    echo -e "${RED}$branch${NC}"
+    if [[ $branch = \#* ]];then
+      continue
+    fi
     git merge "$branch" --no-edit
-  done
+  done < <(cat "$apply_conf")
   
+  rm -f "$apply_conf"
+
   local_update || exit 1
   
   git checkout master
