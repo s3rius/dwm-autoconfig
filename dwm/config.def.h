@@ -26,10 +26,11 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class            instance    title       tags mask     iscentered   isfloating   canfocus  monitor */
-	{ "Gimp",           NULL,       NULL,       0,            1,           1,           1,        -1 },
-	{ "Firefox",        NULL,       NULL,       1 << 8,       1,           0,           1,        -1 },
-  { "Avizo-service",  NULL,       NULL,       0,            1,           1,           0,        -1 }
+	/* class               instance    title       tags mask     iscentered   isfloating   canfocus  monitor */
+	{ "Gimp",              NULL,       NULL,       0,            1,           1,           1,        -1 },
+	{ "Firefox",           NULL,       NULL,       1 << 8,       1,           0,           1,        -1 },
+  { "Avizo-service",     NULL,       NULL,       0,            1,           1,           0,        -1 },
+  { "jetbrains-pycharm", NULL,       NULL,       0,            1,           1,           1,        -1 }
 };
 
 /* layout(s) */
