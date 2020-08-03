@@ -72,6 +72,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioMute,        spawn, SHCMD("volumectl mute") },
   { MODKEY,                       XK_Up,     spawn,          SHCMD("volumectl raise") },
   { MODKEY,                       XK_Down,   spawn,          SHCMD("volumectl lower") },
+  { MODKEY,                       XK_e,      spawn,          SHCMD("thunar") },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
