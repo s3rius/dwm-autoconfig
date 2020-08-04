@@ -12,7 +12,7 @@ function full_update(){
   git checkout -b "$apply_branch"
   apply_conf="$(mktemp /tmp/custom_patchXXXXX)"
   echo "# You can edit this file to manipulate ordering and patches to apply" > "$apply_conf"
-  git branch -a | grep -Ev 'master|remotes' | grep 'patch/' | cut -c 3- >> "$apply_conf"
+  git branch -a | grep -Ev '^master$|remotes' | grep 'patch/' | cut -c 3- >> "$apply_conf"
   echo "$EDITOR"
   if [ -z ${EDITOR+x} ];then
     echo -e "${RED}\$EDITOR env is not found${NC}.\nTry this before running script: 'export EDITOR=/bin/vim'"
