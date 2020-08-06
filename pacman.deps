@@ -5,7 +5,9 @@ bat
 dmenu
 dunst
 firefox
+gnome-keyring 
 gobject-introspection
+libsecret
 lsd
 nitrogen
 opendesktop-fonts
