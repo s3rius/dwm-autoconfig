@@ -31,6 +31,11 @@ function update_firefox_profile(){
   cp -v ./dotfiles/firefox/userChrome.css "$firefox_dir/$fire_profile/chrome"
 }
 
+function install_python_deps(){
+	curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+	curl https://pyenv.run | bash
+}
+
 function copy_dotfiles(){
   mkdir -p "$HOME/.local/bin/"
   sed "s#{{dwm_dir}}#$(pwd)/dwm#g" ./update_desktop.sh > "$HOME/.local/bin/update_desktop"
@@ -65,6 +70,7 @@ function main(){
   build_libs_from_sources
   # shellcheck disable=SC2046
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
+  install_python_deps
   copy_dotfiles
   update_repo
   echo "######## Installation complete ########"
