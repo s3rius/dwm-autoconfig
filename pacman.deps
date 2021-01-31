@@ -23,6 +23,8 @@ unclutter
 vim
 xdg-utils
 xorg
+xorg-xinit
 xorg-xclock
 xterm
+konsole
 zsh

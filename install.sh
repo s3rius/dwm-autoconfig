@@ -19,7 +19,6 @@ function build_libs_from_sources(){
   build_from_git "https://git.suckless.org/wmname" "sudo make install"
   build_from_git "https://github.com/robbyrussell/oh-my-zsh.git" "sh ./tools/install.sh"
   build_from_git "https://github.com/actionless/pikaur.git" "makepkg -fsri"
-  build_from_git "https://gitlab.le-memese.com/s3rius/music_bg.git" "makepkg -fsri"
   build_from_git "https://gitlab.le-memese.com/s3rius/awatch.git" "makepkg -fsri"
 }
 
@@ -32,6 +31,7 @@ function update_firefox_profile(){
 }
 
 function copy_dotfiles(){
+  mkdir -p "$HOME/.local/bin/"
   sed "s#{{dwm_dir}}#$(pwd)/dwm#g" ./update_desktop.sh > "$HOME/.local/bin/update_desktop"
   chmod 777 "$HOME/.local/bin/update_desktop"
   cp -v ./dotfiles/.zshrc      "$HOME"
@@ -49,21 +49,20 @@ function copy_dotfiles(){
   git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/plugins/git-flow-completion
 }
 
-function enable_services(){
-  systemctl --user enable music_bg.service
+function update_repo(){
+for remote in `git branch -r | grep -v '\->'`; do
+	git branch --track "${remote#origin/}" "$remote"
+done
 }
 
 function main(){
   # shellcheck disable=SC2046
   sudo pacman -Syu --needed $(cat ./pacman.deps)
+  build_libs_from_sources
   # shellcheck disable=SC2046
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
-  update_firefox_profile
-  build_libs_from_sources
-  enable_services
   copy_dotfiles
-  git remote update
-  git pull --all
+  update_repo
   echo "######## Installation complete ########"
   echo "Now you can build your desktop."
   echo "To do so just run \`update_desktop -f\`"
