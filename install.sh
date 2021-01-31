@@ -22,6 +22,7 @@ function build_libs_from_sources(){
   build_from_git "https://gitlab.le-memese.com/s3rius/awatch.git" "makepkg -fsri"
 }
 
+# This function can be used after firefox installation.
 function update_firefox_profile(){
   firefox_dir="$HOME/.mozilla/firefox"
   fire_profile="$(grep Default "$firefox_dir"/installs.ini | cut -d '=' -f2)"
@@ -49,6 +50,7 @@ function copy_dotfiles(){
   git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/plugins/git-flow-completion
 }
 
+# Update local branches.
 function update_repo(){
 for remote in `git branch -r | grep -v '\->'`; do
 	git branch --track "${remote#origin/}" "$remote"
@@ -58,6 +60,8 @@ done
 function main(){
   # shellcheck disable=SC2046
   sudo pacman -Syu --needed $(cat ./pacman.deps)
+  # Install all fonts.
+  pacman -Syu $(sudo pacman -Ssq "ttf-")
   build_libs_from_sources
   # shellcheck disable=SC2046
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
