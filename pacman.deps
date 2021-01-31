@@ -9,6 +9,7 @@ gnome-keyring
 gobject-introspection
 libsecret
 lsd
+maim
 nitrogen
 opendesktop-fonts
 picom
@@ -26,5 +27,6 @@ xorg
 xorg-xinit
 xorg-xclock
 xterm
+xclip
 konsole
 zsh
