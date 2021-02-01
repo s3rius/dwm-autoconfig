@@ -1,3 +1,4 @@
+acpi
 alsa-utils
 asp
 base-devel
@@ -7,6 +8,7 @@ dunst
 firefox
 gnome-keyring 
 gobject-introspection
+konsole
 libsecret
 lsd
 maim
@@ -22,11 +24,12 @@ ttf-font-awesome
 ttf-ubuntu-font-family
 unclutter
 vim
+xclip
 xdg-utils
 xorg
-xorg-xinit
 xorg-xclock
+xorg-xinit
 xterm
-xclip
-konsole
 zsh
+zsh-autosuggestions
+zsh-syntax-highlighting

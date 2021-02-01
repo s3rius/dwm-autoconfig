@@ -57,7 +57,7 @@ function copy_dotfiles(){
 
 # Update local branches.
 function update_repo(){
-for remote in `git branch -r | grep -v '\->'`; do
+for remote in $(git branch -r | grep -v '\->'); do
 	git branch --track "${remote#origin/}" "$remote"
 done
 }
@@ -66,6 +66,7 @@ function main(){
   # shellcheck disable=SC2046
   sudo pacman -Syu --needed $(cat ./pacman.deps)
   # Install all fonts.
+  # shellcheck disable=SC2046
   pacman -Syu $(sudo pacman -Ssq "ttf-")
   build_libs_from_sources
   # shellcheck disable=SC2046
