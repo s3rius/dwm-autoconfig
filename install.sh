@@ -67,7 +67,7 @@ function main(){
   sudo pacman -Syu --needed $(cat ./pacman.deps)
   # Install all fonts.
   # shellcheck disable=SC2046
-  pacman -Syu $(sudo pacman -Ssq "ttf-")
+  pacman -Syu $(sudo pacman -Ssq "ttf-" | grep -Ev "nerd-fonts-symbols-mono|hanazono")
   build_libs_from_sources
   # shellcheck disable=SC2046
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
