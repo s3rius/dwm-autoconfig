@@ -1,0 +1,14 @@
+#!/bin/zsh
+zparseopts -E -A opts -user:: -db:: -password:: -port::
+
+db_name="${opts[--db]:-db}"
+
+docker run \
+    --rm \
+    -d \
+    -p "${opts[--port]:-5432}:5432" \
+    --name="${db_name}-pg" \
+    -e POSTGRES_PASSWORD="${opts[--password]:-password}" \
+    -e POSTGRES_USER="${opts[--user]:-user}" \
+    -e POSTGRES_DB="${db_name}" \
+    postgres

@@ -40,6 +40,7 @@ function copy_dotfiles(){
   mkdir -p "$HOME/.local/bin/"
   sed "s#{{dwm_dir}}#$(pwd)/dwm#g" ./update_desktop.sh > "$HOME/.local/bin/update_desktop"
   chmod 777 "$HOME/.local/bin/update_desktop"
+  cp -vr ./dotfiles/.zfunc     "$HOME"
   cp -v ./dotfiles/.zshrc      "$HOME"
   cp -v ./dotfiles/.zshenv     "$HOME"
   cp -v ./dotfiles/.zshenv     "$HOME"
