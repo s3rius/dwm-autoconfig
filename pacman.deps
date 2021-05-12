@@ -9,6 +9,7 @@ firefox
 gnome-keyring 
 gobject-introspection
 konsole
+libldac
 libsecret
 lsd
 maim
