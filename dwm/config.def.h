@@ -12,14 +12,13 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "FiraMono Nerd Font:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char color_blue[]      = "#7B7565";
-static const char color_cyan[]      = "#7A7464";
-static const char color_pink[]      = "#FF7645";
-static const char color_black[]     = "#F3EACD";
+static const char color_purple[]    = "#4B4DF5";
+static const char color_black[]     = "#000000";
+static const char color_white[]     = "#FFFFFF";
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { color_blue, color_black, color_cyan },
-	[SchemeSel]  = { color_pink, color_black, color_pink },
+	/*               fg(font)    bg           border   */
+	[SchemeNorm] = { color_white, color_black, color_black },
+	[SchemeSel]  = { color_purple, color_black, color_purple },
 };
 
 /* tagging */
@@ -64,7 +63,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", color_black, "-nf", color_cyan, "-sb", color_pink, "-sf", color_black, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", color_black, "-nf", color_white, "-sb", color_purple, "-sf", color_black, NULL };
 static const char *termcmd[]  = { "konsole", NULL };
 
 #include "movestack.c"
@@ -82,6 +81,7 @@ static Key keys[] = {
   { 0,                            XF86XK_AudioPrev,        spawn, SHCMD("playerctl previous") },
   { 0,                            XF86XK_AudioPause,       spawn, SHCMD("playerctl play-pause") },
   { 0,                            XF86XK_AudioPlay,        spawn, SHCMD("playerctl play-pause") },
+  { 0,                            XF86XK_AudioPreset,        spawn, SHCMD("playerctl play-pause") },
   { 0,                            XF86XK_AudioStop,        spawn, SHCMD("playerctl stop") },
   { MODKEY,                       XK_Up,     spawn,          SHCMD("volumectl raise") },
   { MODKEY,                       XK_Down,   spawn,          SHCMD("volumectl lower") },
