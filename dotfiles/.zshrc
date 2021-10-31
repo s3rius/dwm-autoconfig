@@ -69,7 +69,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow-completion sudo docker autojump)
+plugins=(git git-flow-completion sudo docker autojump minikube)
 
 source $ZSH/oh-my-zsh.sh
 alias ls=lsd
@@ -86,6 +86,8 @@ alias dex="docker exec -it"
 alias dps="docker ps -a"
 alias dpsq="docker ps -aq"
 alias poop='git push origin "$(git branch | grep "\*" | cut -d " " -f2)"'
+alias vommit='git commit -sS'
+alias eat_shit='git pull origin "$(git branch | grep "\*" | cut -d " " -f2)"'
 alias big_poop="git push --all"
 alias cat="bat"
 # User configuration
@@ -137,3 +139,4 @@ complete -o nospace -C /usr/bin/terraform terraform
 eval "$(pyenv init -)"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+eval "$(starship init zsh)"

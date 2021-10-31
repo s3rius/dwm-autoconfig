@@ -3,12 +3,13 @@ alsa-utils
 asp
 base-devel
 bat
+community/kitty
+community/starship
 dmenu
 dunst
 firefox
 gnome-keyring 
 gobject-introspection
-konsole
 libldac
 libsecret
 lsd
