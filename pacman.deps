@@ -10,6 +10,8 @@ dunst
 firefox
 gnome-keyring 
 gobject-introspection
+kubectl
+lazygit
 libldac
 libsecret
 lsd

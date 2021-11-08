@@ -11,7 +11,5 @@ while true; do
  sleep 2s
 done &
 
-while true; do
-    wmname LG3D
-    dwm >/dev/null 2>&1
-done
+wmname LG3D
+dwm >/dev/null 2>&1

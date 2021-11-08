@@ -2,7 +2,7 @@
 
 function cleanup(){
   # shellcheck disable=SC2046
-  rm -rf $(find . -name "build_*" -type d)
+  sudo rm -rf $(sudo find . -name "build_*" -type d)
 }
 
 function build_from_git(){
@@ -56,13 +56,6 @@ function copy_dotfiles(){
   git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/plugins/git-flow-completion
 }
 
-# Update local branches.
-function update_repo(){
-for remote in $(git branch -r | grep -v '\->'); do
-	git branch --track "${remote#origin/}" "$remote"
-done
-}
-
 function main(){
   # shellcheck disable=SC2046
   sudo pacman -Syu --needed $(cat ./pacman.deps)
@@ -74,11 +67,10 @@ function main(){
   pikaur -Syu --needed --noconfirm --noedit $(cat ./pikaur.deps)
   install_python_deps
   copy_dotfiles
-  update_repo
+  pushd dwm || exit
+  sudo make install
+  popd || exit
   echo "######## Installation complete ########"
-  echo "Now you can build your desktop."
-  echo "To do so just run \`update_desktop -f\`"
-  update_desktop -h
 }
 
 trap cleanup EXIT
