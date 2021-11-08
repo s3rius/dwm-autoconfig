@@ -1,5 +1,6 @@
 dwm/dwm
 dwm/drm
+dwm/.vscode
 dwm/drw.o
 dwm/dwm.o
 dwm/util.o
