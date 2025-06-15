@@ -57,6 +57,7 @@ function copy_dotfiles(){
 }
 
 function main(){
+  echo "My name is s3rius and I will install my dwm setup for you."
   # shellcheck disable=SC2046
   sudo pacman -Syu --needed $(cat ./pacman.deps)
   # Install all fonts.
